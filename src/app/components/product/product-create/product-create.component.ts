@@ -1,3 +1,4 @@
+import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService:ProductService) { }
 
   ngOnInit(): void {
+    // this.productService.showMessage("Ola tudo bem?");
+    this.productService.get().subscribe((res) => console.log(res));
+
   }
 
 }
