@@ -24,7 +24,7 @@ export class ProductService {
   }
 
   get(){
-    return this.http.get<Product>(`${environment.apiUrl}${this.baseUrl}`);
+    return this.http.get<Product[]>(`${environment.apiUrl}${this.baseUrl}`);
   }
   
 }
