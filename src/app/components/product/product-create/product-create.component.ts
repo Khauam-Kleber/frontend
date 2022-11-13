@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from './../product.model';
 import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,16 +15,35 @@ export class ProductCreateComponent implements OnInit {
     price: 0
   }
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.verifyIfEdit();
+  }
 
+  verifyIfEdit() {
+    if (this.route.snapshot.paramMap.get('id')) {
+      let id = this.route.snapshot.paramMap.get('id');
+      this.productService.getById(id).subscribe((res) => {
+        this.product = res;
+      });
+    }
+  }
 
 
   createProduct() {
-    this.productService.create(this.product).subscribe(() => {
-      this.productService.showMessage("Criado com Sucesso?");
-    });
+    if(this.product.id){
+      this.productService.update(this.product.id, this.product).subscribe(() => {
+        this.productService.showMessage("Atualizado com Sucesso!");
+        this.router.navigateByUrl("/products")
+      });
+    }else{
+      this.productService.create(this.product).subscribe(() => {
+        this.productService.showMessage("Criado com Sucesso!");
+        this.router.navigateByUrl("/products")
+      });
+    }
+   
   }
 
   cancel() {

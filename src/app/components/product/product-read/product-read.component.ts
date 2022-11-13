@@ -23,4 +23,9 @@ export class ProductReadComponent implements OnInit {
     });
   }
 
+  deleteProduct(id: number) {
+    this.productService.delete(id).subscribe((res) => {
+      this.getProducts(); 
+    });
+  }
 }
