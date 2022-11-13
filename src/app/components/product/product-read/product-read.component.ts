@@ -14,18 +14,23 @@ export class ProductReadComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getProducts(); 
+    this.getProducts();
   }
 
   getProducts() {
     this.productService.get().subscribe((res) => {
       this.products = res;
-    });
+    },
+      error => {
+        this.productService.showMessage("Erro ao buscar");
+      });
   }
 
   deleteProduct(id: number) {
     this.productService.delete(id).subscribe((res) => {
-      this.getProducts(); 
+      this.getProducts();
+    }, error => {
+      this.productService.showMessage("Erro ao deletar");
     });
   }
 }

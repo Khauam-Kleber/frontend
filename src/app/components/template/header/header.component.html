@@ -5,9 +5,9 @@
         </a>
     </span>
     <span class="title-group" fxLayout="row">
-        <a fxLayoutAlign="space-around center">
-            <i class="material-icons"> home </i>
-            Início
+        <a [routerLink]="getUrl()" fxLayoutAlign="space-around center">
+            <i class="material-icons">   {{getIcon()}} </i>
+            {{getTitle()}}
         </a>
     </span>
 </mat-toolbar>

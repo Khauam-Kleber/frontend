@@ -15,7 +15,7 @@ export class ProductService {
     this.snackBar.open(msg, 'X', {
       duration: 3000,
       horizontalPosition: "right",
-      verticalPosition: "top"
+      verticalPosition: "top",
     });
   }
 

@@ -33,14 +33,21 @@ export class ProductCreateComponent implements OnInit {
 
   createProduct() {
     if(this.product.id){
-      this.productService.update(this.product.id, this.product).subscribe(() => {
+      this.productService.update(this.product.id, this.product).subscribe(
+        () => {
         this.productService.showMessage("Atualizado com Sucesso!");
         this.router.navigateByUrl("/products")
+      },
+      error => {
+        this.productService.showMessage("Erro!");
       });
     }else{
       this.productService.create(this.product).subscribe(() => {
         this.productService.showMessage("Criado com Sucesso!");
         this.router.navigateByUrl("/products")
+      }, 
+      error => {
+        this.productService.showMessage("Erro!");
       });
     }
    
